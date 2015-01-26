@@ -32,3 +32,16 @@ func inRange3(target: Position, ownPosition: Position, range: Distance) -> Bool 
     let targetDistance = sqrt(dx * dx + dy * dy)
     return targetDistance <= range && targetDistance >= minimumDistance
 }
+
+// PURPOSE - check if any ships are too close to one of our ships and avoid targetting them
+func inRange4(target: Position, ownPosition: Position, friendly: Position, range: Distance) -> Bool {
+    let dx = ownPosition.x - target.x
+    let dy = ownPosition.y - target.y
+    let targetDistance = sqrt(dx * dx + dy * dy)
+    let friendlyDx = friendly.x - target.x
+    let friendlyDy = friendly.y - target.y
+    let friendlyDistance = sqrt(friendDx * friendlyDx + friendlyDy * friendlyDy)
+    return targetDistance <= range
+        && targetDistance >= minimumDistance
+        && (friendlyDistance >= minimumDistance)
+}
