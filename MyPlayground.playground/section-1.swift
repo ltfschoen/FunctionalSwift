@@ -12,7 +12,7 @@ var str = "Hello, playground"
 typealias Position = CGPoint
 typealias Distance = CGFloat
 
-// BRIEF - check if point is in range.
+// PURPOSE - check if point is in range.
 func inRange1(target: Position, ownPosition: Position, range: Distance) -> Bool {
     
     // assume we are not always located at origin
@@ -21,4 +21,14 @@ func inRange1(target: Position, ownPosition: Position, range: Distance) -> Bool 
     let targetDistance = sqrt(dx * dx + dy * dy)
     
     return targetDistance <= range
+}
+
+// PURPOSE - check if enemy ships are too close (within minimum distance away) to our current position and avoid targeting them
+let minimumDistance: Distance = 2.0
+
+func inRange3(target: Position, ownPosition: Position, range: Distance) -> Bool {
+    let dx = ownPosition.x - target.x
+    let dy = ownPosition.y - target.y
+    let targetDistance = sqrt(dx * dx + dy * dy)
+    return targetDistance <= range && targetDistance >= minimumDistance
 }
